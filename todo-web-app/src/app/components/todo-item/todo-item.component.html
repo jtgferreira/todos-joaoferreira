@@ -1,0 +1,14 @@
+<nz-card>
+  <div class="card-content">
+    <div class="title">
+      <span nz-typography><strong>{{ data.title }}</strong></span>
+      <nz-tag nzColor="blue" [nzBordered]="false">{{ data.category }}</nz-tag>
+    </div>
+
+    @if (data.description) {
+      <p>{{ data.description }}</p>
+    }
+
+    <button nz-button nzType="dashed">Done</button>
+  </div>
+</nz-card>
