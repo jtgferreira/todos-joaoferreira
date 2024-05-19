@@ -1,0 +1,35 @@
+services:
+  web-api:
+    image: web-api-image
+    container_name: web-api-container
+    networks:
+      - todos-network
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    volumes:
+      - ./server/:/app
+    command: ./gradlew run -t
+
+  web-app:
+    image: web-app-image
+    container_name: web-app-container
+    networks:
+      - todos-network
+    ports:
+      - 4200:4200
+    command: "ng serve --host 0.0.0.0 --poll=2000 --port 4200 --disable-host-check"
+    build:
+      context: ./todo-web-app
+      dockerfile: Dockerfile
+    depends_on:
+      - web-api
+    volumes:
+      - ./todo-web-app/:/home/app
+      - /home/app/node_modules
+
+
+networks:
+  todos-network:
