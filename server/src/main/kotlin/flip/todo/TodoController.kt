@@ -6,6 +6,7 @@ import io.micronaut.http.annotation.Controller
 import io.micronaut.http.annotation.Get
 import io.micronaut.http.annotation.PathVariable
 import io.micronaut.http.annotation.Post
+import io.micronaut.http.annotation.Delete
 import java.util.concurrent.ConcurrentHashMap
 import java.util.Optional
 
@@ -26,4 +27,15 @@ class TodoController {
         todos[id] = todo
         return HttpResponse.created(todo)
     }
+
+    @Delete("/{id}")
+    fun remove(@PathVariable id: Long): HttpResponse<Todo> {
+        var removedValue = this.todos.remove(id);
+       
+        if (removedValue == null) {
+            return HttpResponse.notFound()
+        }
+        
+        return HttpResponse.ok(removedValue)
+    } 
 }
