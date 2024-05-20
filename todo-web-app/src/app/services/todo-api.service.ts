@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { Todo } from '../models/todo.model';
+import { CreateTodo, Todo } from '../models/todo.model';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
@@ -8,13 +8,17 @@ import { Observable } from 'rxjs';
 })
 export class TodoApiService {
   private readonly serverUrl = 'http://localhost:8080';
-  private readonly getTodosUrl = `${this.serverUrl}/todos`;
+  private readonly todosUrl = `${this.serverUrl}/todos`;
 
   httpClient = inject(HttpClient);
 
   constructor() { }
 
   getTodos(): Observable<Todo[]> {
-    return this.httpClient.get<Todo[]>(this.getTodosUrl);
+    return this.httpClient.get<Todo[]>(this.todosUrl);
+  }
+
+  postTodo(todo: CreateTodo): Observable<Todo> {
+    return this.httpClient.post<Todo>(this.todosUrl, { ...todo });
   }
 }

@@ -1,6 +1,6 @@
 <div>
   <h1 nz-typography>Flip Challenge - Todo Web App</h1>
-  
+  <button nz-button nzType="primary" (click)="isCreateModalVisible = true">Add Todo</button>
   <nz-list nzGrid>
     <div nz-row [nzGutter]="16">
       @for (item of todos(); track item.id) {
@@ -13,3 +13,9 @@
     </div>
   </nz-list>
 </div>
+
+<nz-modal [(nzVisible)]="isCreateModalVisible" (nzOnCancel)="isCreateModalVisible=false" nzTitle="Add a Todo" [nzFooter]="null">
+  <ng-container *nzModalContent>
+    <app-create-todo-form (newTodoSubmitted)="createTodo($event)" />
+  </ng-container>
+</nz-modal>

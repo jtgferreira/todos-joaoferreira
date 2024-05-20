@@ -1,0 +1,25 @@
+<form nz-form [formGroup]="form" (ngSubmit)="submitForm()">
+  <nz-form-item>
+    <nz-form-label nzRequired>Todo</nz-form-label>
+    <nz-form-control nzErrorTip="Please input your todo">
+      <input formControlName="title" nz-input placeholder="Type the title" />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzRequired>Category</nz-form-label>
+    <nz-form-control nzErrorTip="Please input your todo's category">
+      <input formControlName="category" nz-input placeholder="Type the category" />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label>Description</nz-form-label>
+    <nz-form-control >
+      <textarea formControlName="description" nz-input rows="2" placeholder="Type a description"></textarea>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control [nzOffset]="4">
+      <button nz-button nzType="primary" [disabled]="!form.valid">Submit</button>
+    </nz-form-control>
+  </nz-form-item>
+</form>
