@@ -43,4 +43,8 @@ export class AppComponent implements OnInit {
     this.service.postTodo(todo).subscribe(item => this.todos.update(values => [item, ...values]));
     this.isCreateModalVisible = false;
   }
+
+  removeTodo(todoId: number): void {
+    this.service.removeTodo(todoId).subscribe(item => this.todos.update(values => values.filter(todo => todo.id != item.id)));
+  }
 }

@@ -12,13 +12,15 @@ export class TodoApiService {
 
   httpClient = inject(HttpClient);
 
-  constructor() { }
-
   getTodos(): Observable<Todo[]> {
     return this.httpClient.get<Todo[]>(this.todosUrl);
   }
 
   postTodo(todo: CreateTodo): Observable<Todo> {
     return this.httpClient.post<Todo>(this.todosUrl, { ...todo });
+  }
+
+  removeTodo(todoId: number): Observable<Todo> {
+    return this.httpClient.delete<Todo>(`${this.todosUrl}/${todoId}`);
   }
 }
